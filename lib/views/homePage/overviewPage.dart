@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:data_table_2/data_table_2.dart';
-
 import 'package:invoice_bot/structure/invoice.dart';
 import 'package:invoice_bot/structure/notice.dart';
 import 'package:invoice_bot/structure/vat.dart';
@@ -95,18 +93,18 @@ class OverviewPage extends StatelessWidget {
       ),
       child: DataTable(
         dividerThickness: 0.0,
-        columns: const <DataColumn2>[
-          DataColumn2(label: Text("Status", style: headerTextStyle)),
-          DataColumn2(label: Text("Invoice Number", style: headerTextStyle)),
-          DataColumn2(label: Text("VAT Base (CZK)", style: headerTextStyle)),
-          DataColumn2(label: Text("VAT Amount (CZK)", style: headerTextStyle)),
-          DataColumn2(label: Text("Tax Point", style: headerTextStyle)),
+        columns: const <DataColumn>[
+          DataColumn(label: Text("Status", style: headerTextStyle)),
+          DataColumn(label: Text("Invoice Number", style: headerTextStyle)),
+          DataColumn(label: Text("VAT Base (CZK)", style: headerTextStyle)),
+          DataColumn(label: Text("VAT Amount (CZK)", style: headerTextStyle)),
+          DataColumn(label: Text("Tax Point", style: headerTextStyle)),
         ],
-        rows: List<DataRow2>.generate(notice.invoices?.length ?? 0, (int index) {
+        rows: List<DataRow>.generate(notice.invoices.length, (int index) {
 
-          final Invoice invoice = notice.invoices![index];
+          final Invoice invoice = notice.invoices[index];
 
-          String taxPoint = "";
+          String taxPoint = "-";
           if(invoice.taxPoint != null) {
             taxPoint = DateFormat("dd MMM yyyy").format(invoice.taxPoint!);
           }
@@ -126,15 +124,17 @@ class OverviewPage extends StatelessWidget {
             ],
           );
 
-          return DataRow2(
+          final NumberFormat format = NumberFormat.currency(symbol: "");
+
+          return DataRow(
             color: MaterialStatePropertyAll(
                 index.isEven ? theme.borderColor.withOpacity(0.2) : Colors
                     .transparent),
             cells: <DataCell>[
               DataCell(issueCell),
               DataCell(Text(invoice.invoiceNumber, style: cellTextStyle)),
-              DataCell(Text(invoice.vats.first.vatBase.toString(), style: cellTextStyle)),
-              DataCell(Text(invoice.vats.first.vatAmount.toString(), style: cellTextStyle)),
+              DataCell(Text(invoice.vats.isNotEmpty ? format.format(invoice.vats.first.vatBase).toString() : "-", style: cellTextStyle)),
+              DataCell(Text(invoice.vats.isNotEmpty ? format.format(invoice.vats.first.vatAmount).toString() : "-", style: cellTextStyle)),
               DataCell(Text(taxPoint, style: cellTextStyle)),
             ],
           );

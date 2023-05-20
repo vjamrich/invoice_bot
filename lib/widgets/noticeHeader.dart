@@ -35,6 +35,8 @@ class NoticeHeader extends StatelessWidget {
         children: <Widget>[
           Text(
             notice.companyName ?? "(undefined)",
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 34.0,
               color: theme.textPrimaryColor,

@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_bot/structure/invoice.dart';
 import 'package:invoice_bot/structure/notice.dart';
@@ -51,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 0),
       child: pages[activePage],
     );
   }

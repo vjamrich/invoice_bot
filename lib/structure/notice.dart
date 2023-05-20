@@ -7,13 +7,13 @@ class Notice {
   String? tin;
   DateTime? startDate;
   DateTime? endDate;
-  List<Invoice>? invoices;
+  List<Invoice> invoices;
 
   Notice({
     this.companyName,
     this.tin,
     this.startDate,
     this.endDate,
-    this.invoices,
+    this.invoices = const <Invoice>[],
   });
 }
