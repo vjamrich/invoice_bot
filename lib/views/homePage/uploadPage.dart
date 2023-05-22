@@ -176,6 +176,7 @@ class _UploadPageState extends State<UploadPage> {
         ),
         const SizedBox(width: 4.0),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
@@ -233,7 +234,7 @@ class _UploadPageState extends State<UploadPage> {
     );
 
     return AspectRatio(
-      aspectRatio: 1.2,
+      aspectRatio: 1.3,
       child: Container(
         // height: 100.0,
         width: double.maxFinite,

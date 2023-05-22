@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:invoice_bot/utils/getTemplate.dart';
 
 import 'package:oktoast/oktoast.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
@@ -10,6 +10,7 @@ import 'package:invoice_bot/structure/notice.dart';
 import 'package:invoice_bot/widgets/noticeHeader.dart';
 import 'package:invoice_bot/widgets/primaryButton.dart';
 import 'package:invoice_bot/widgets/secondaryButton.dart';
+import 'package:rich_clipboard/rich_clipboard.dart';
 
 
 class GeneratePage extends StatelessWidget {
@@ -61,9 +62,13 @@ class GeneratePage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () async {
+                  final String plainText = await controller.getPlainText();
+                  final String htmlText = await controller.getText();
+                  await RichClipboard.setData(RichClipboardData(
+                    text: plainText,
+                    html: htmlText,
+                  ));
                   showToast("Message copied to clipboard");
-                  final String content = await controller.getPlainText();
-                  await Clipboard.setData(ClipboardData(text: content));
                 },
               ),
             ],
@@ -117,7 +122,7 @@ class GeneratePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: QuillHtmlEditor(
-              text: "This is a placeholder template message",
+              text: getTemplate(notice),
               hintText: "",
               controller: controller,
               minHeight: 250.0,

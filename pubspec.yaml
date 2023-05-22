@@ -44,6 +44,7 @@ dependencies:
   data_table_2: ^2.4.2
   animations: ^2.0.7
   oktoast: ^3.3.1
+  rich_clipboard: ^1.0.1
 
 dev_dependencies:
   flutter_test:

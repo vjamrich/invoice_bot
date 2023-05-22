@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OKToast(
-      backgroundColor: theme.bgPrimaryColor,
+      backgroundColor: Colors.black87,
       duration: const Duration(seconds: 3),
       radius: theme.borderRadius.bottomLeft.x,
       position: ToastPosition.bottom,

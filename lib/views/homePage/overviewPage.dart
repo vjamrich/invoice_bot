@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 
 import 'package:invoice_bot/structure/invoice.dart';
 import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/structure/vat.dart';
 import 'package:invoice_bot/widgets/noticeHeader.dart';
 import 'package:invoice_bot/utils/theme.dart' as theme;
 import 'package:invoice_bot/widgets/primaryButton.dart';

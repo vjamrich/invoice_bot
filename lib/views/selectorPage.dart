@@ -111,9 +111,8 @@ class _SelectorPageState extends State<SelectorPage> {
 
   Widget _header() {
     return Container(
-      height: 55.0,
       width: double.infinity,
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(
         color: theme.bgPrimaryColor,
         border: Border(
