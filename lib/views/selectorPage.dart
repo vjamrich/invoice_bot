@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_bot/views/homePage.dart';
 
@@ -55,9 +54,11 @@ class _SelectorPageState extends State<SelectorPage> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 0),
-                      child: pages[activePage],
+                    child: SelectionArea(
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 0),
+                        child: pages[activePage],
+                      ),
                     ),
                   ),
                 ],

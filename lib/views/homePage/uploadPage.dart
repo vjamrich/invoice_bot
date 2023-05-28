@@ -38,7 +38,6 @@ class _UploadPageState extends State<UploadPage> {
 
   bool _isHighlight = false;
   late DropzoneViewController controller;
-  final List<String> mime = <String>["application/pdf", "text/xml"];
 
   @override
   Widget build(BuildContext context) {
@@ -72,12 +71,14 @@ class _UploadPageState extends State<UploadPage> {
               _uploadFileIndicator(
                 title: "Notice | PDF",
                 description: isNoticeUploaded ? "uploaded successfully" : "(required)",
+                mime: <String>["application/pdf"],
                 isPicked: isNoticeUploaded,
               ),
               const SizedBox(height: 14.0),
               _uploadFileIndicator(
                 title: "Invoices | XML",
                 description: isXmlInvoicesUploaded ? "uploaded successfully" : "(optional)",
+                mime: <String>["text/xml"],
                 isPicked: isXmlInvoicesUploaded,
               ),
               const SizedBox(height: 16.0),
@@ -111,16 +112,25 @@ class _UploadPageState extends State<UploadPage> {
 
   Future<void> onSelect(dynamic event) async {
     final Uint8List data = await uploadFile(event, controller);
+    final String url = await controller.createFileUrl(event);
     final String dataMime = await controller.getFileMIME(event);
 
     if(dataMime == "text/xml") {
-      xmlInvoices = convertXml(data);
-      isXmlInvoicesUploaded = true;
-      showToast("XML uploaded successfully");
+      xmlInvoices = convertXml(url);
+      if(xmlInvoices != null) {
+        isXmlInvoicesUploaded = true;
+        showToast("XML uploaded successfully");
+      } else {
+        showToast("Uploaded XML is invalid");
+      }
     } else if(dataMime == "application/pdf") {
       notice = convertPdf(data);
-      isNoticeUploaded = true;
-      showToast("Notice uploaded successfully");
+      if(notice != null) {
+        isNoticeUploaded = true;
+        showToast("Notice uploaded successfully");
+      } else {
+        showToast("Uploaded notice is invalid");
+      }
     } else {
       showToast("Invalid file");
     }
@@ -164,6 +174,7 @@ class _UploadPageState extends State<UploadPage> {
   Widget _uploadFileIndicator({
     required String title,
     required String description,
+    required List<String> mime,
     bool isPicked = false,
   }) {
     return Row(
@@ -221,6 +232,8 @@ class _UploadPageState extends State<UploadPage> {
 
   Widget _dropZone() {
 
+    const List<String> mime = ["application/pdf", "text/xml"];
+
     TextStyle style = const TextStyle(
       fontSize: 16.0,
       color: theme.textSecondaryColor,
@@ -266,9 +279,11 @@ class _UploadPageState extends State<UploadPage> {
                     style: style,
                   ),
                   GestureDetector(
-                    child: Text(
-                      "choose file",
-                      style: hyperlinkStyle,
+                    child: SelectionContainer.disabled(
+                      child: Text(
+                        "choose file",
+                        style: hyperlinkStyle,
+                      ),
                     ),
                     onTap: () async {
                       final List<dynamic> events = await controller.pickFiles(mime: mime);

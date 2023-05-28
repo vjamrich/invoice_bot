@@ -94,23 +94,25 @@ class GeneratePage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: ToolBar(
-              controller: controller,
-              toolBarColor: Colors.transparent,
-              iconColor: theme.textSecondaryColor,
-              activeIconColor: theme.accentSecondaryColor,
-              padding: const EdgeInsets.only(right: 12.0),
-              toolBarConfig: const <ToolBarStyle>[
-                ToolBarStyle.bold,
-                ToolBarStyle.italic,
-                ToolBarStyle.underline,
-                ToolBarStyle.size,
-                ToolBarStyle.align,
-                ToolBarStyle.indentMinus,
-                ToolBarStyle.indentAdd,
-                ToolBarStyle.listOrdered,
-                ToolBarStyle.listBullet,
-              ],
+            child: SelectionContainer.disabled(
+              child: ToolBar(
+                controller: controller,
+                toolBarColor: Colors.transparent,
+                iconColor: theme.textSecondaryColor,
+                activeIconColor: theme.accentSecondaryColor,
+                padding: const EdgeInsets.only(right: 12.0),
+                toolBarConfig: const <ToolBarStyle>[
+                  ToolBarStyle.bold,
+                  ToolBarStyle.italic,
+                  ToolBarStyle.underline,
+                  ToolBarStyle.size,
+                  ToolBarStyle.align,
+                  ToolBarStyle.indentMinus,
+                  ToolBarStyle.indentAdd,
+                  ToolBarStyle.listOrdered,
+                  ToolBarStyle.listBullet,
+                ],
+              ),
             ),
           ),
           const Divider(
