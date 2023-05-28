@@ -11,9 +11,6 @@ import 'package:invoice_bot/structure/vat.dart';
 // - Name of the supplier
 // - Assumes all invoices are in CZK
 // - Shorter form of the company name
-// Remaining
-// - Control statement sections
-// - proper singular / plural form for invoice(s) was / were
 String getTemplate(Notice notice) {
 
   final String emailTemplate =
@@ -31,6 +28,7 @@ String getTemplate(Notice notice) {
       "<li>to confirm the validity of the originally filed control statement, or</li>"
       "<li>to correct the originally reported transactions.</li>"
   "</ol>"
+  "<br>"
   "${_getStatementTemplate(notice)}"
   "<b>Please kindly double check these transactions and let us know whether confirmation, update "
   "or amendment of these transactions is needed. Alternatively, please provide us with the copies "
@@ -61,9 +59,12 @@ String _getStatementTemplate(Notice notice) {
     }).toList();
     Set<String> set = <String>{};
     List<Invoice> invoicesByVatId = invoicesByType.where((Invoice invoice) => set.add(invoice.invoiceVatId)).toList();
-
-    if(invoicesByVatId.isNotEmpty) {
-      groupedInvoices.add(invoicesByVatId);
+    for(Invoice invoice in invoicesByVatId) {
+      final String vatId = invoice.invoiceVatId;
+      List<Invoice> invoicesByVatId = notice.invoices.where((Invoice invoice) => invoice.invoiceVatId == vatId).toList();
+      if(invoicesByVatId.isNotEmpty) {
+        groupedInvoices.add(invoicesByVatId);
+      }
     }
   }
 
@@ -72,7 +73,7 @@ String _getStatementTemplate(Notice notice) {
     final bool isPurchaser = invoices.first.invoiceType == InvoiceType.purchaser;
 
     // TODO double check if the purchaser is the one with the right wording, or the operator should be switched
-    statementTemplate += "<br>${statementTemplate.isEmpty ? "The" : "Moreover, the"} tax authorities identified that the following invoice${invoices.length > 1 ? "s were" : " was"} ${isPurchaser ? "not" : ""} reported by ${notice.companyName} in section "
+    statementTemplate += "${statementTemplate.isEmpty ? "The" : "Moreover, the"} tax authorities identified that the following invoice${invoices.length > 1 ? "s were" : " was"} ${isPurchaser ? "not" : ""} reported by ${notice.companyName} in section "
     "${isPurchaser ? "A.4." : "B.2."} of the control statement as sales of goods/services to its ${isPurchaser ? "purchaser" : "supplier"} with "
     "VAT ID <b>${notice.invoices.first.invoiceVatId}</b> whereas ${invoices.length > 1 ? "they were" : "it was"} ${isPurchaser ? "" : "not"} reported by the purchaser in section ${isPurchaser ? "B.2." : "A.4."} of the control "
     "statement as goods/services ${isPurchaser ? "purchased from" : "sold to"} ${notice.companyName}:"
