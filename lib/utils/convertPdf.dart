@@ -17,7 +17,7 @@ Notice? convertPdf(Uint8List data) {
     final RegExp tinRegExp = RegExp(r"DIČ:\s+(\S+)");
     final RegExp startDateRegExp = RegExp(r"od (\d{2}\.\d{2}\.\d{4})");
     final RegExp endDateRegExp = RegExp(r"do (\d{2}\.\d{2}\.\d{4})");
-    final RegExp invoiceVatId = RegExp(r"DIČ dod.:\s+(\S+)");
+    final RegExp invoiceVatId = RegExp(r"(DIČ dod.|DIČ odb.):\s+(\S+)");
     final RegExp invoiceNumberRegExp = RegExp(r"Ev\.č\.:\s+(\d+)\s*");
     final RegExp taxPointRegExp = RegExp(r"DPPD: (\d{2}\.\d{2}\.\d{4})");
     final RegExp vatBase1RegExp = RegExp(r" ZD1:\s*([0-9\s.]+)");
@@ -26,6 +26,7 @@ Notice? convertPdf(Uint8List data) {
     final RegExp vatAmount2RegExp = RegExp(r" D2:\s*([0-9\s.]+)");
     final RegExp vatBase3RegExp = RegExp(r" ZD3:\s*([0-9\s.]+)");
     final RegExp vatAmount3RegExp = RegExp(r" D3:\s*([0-9\s.]+)");
+    // Daňový\s+subjekt\s+v\s+oddílu\s+(\S+)
 
     List<String> splitText = text.split(RegExp(r" {2,}"));
     final String? tin = tinRegExp.firstMatch(text)?.group(1);
@@ -49,7 +50,8 @@ Notice? convertPdf(Uint8List data) {
     List<Invoice> invoices = <Invoice>[];
     // TODO issue if we do not have same amount of matches - it will most likely error
     for(int index = 0; index < invoiceNumberMatches.length; index++) {
-      final String? invoiceVatId = invoiceVatIdMatches[index].group(1);
+      final String? invoiceVatId = invoiceVatIdMatches[index].group(2); // TODO group 1 is capturing, if it's supplier or provider
+      final InvoiceType invoiceType = invoiceVatIdMatches[index].group(1) == "DIČ odb." ? InvoiceType.purchaser : InvoiceType.supplier;
       final String? invoiceNumber = invoiceNumberMatches[index].group(1);
       final DateTime? taxPoint = formatDateString(date: taxPointMatches[index].group(1));
       final double? vatBase1 = formatVatString(vatBase1Matches[index].group(1));
@@ -99,6 +101,7 @@ Notice? convertPdf(Uint8List data) {
         invoices.add(Invoice(
           invoiceVatId: invoiceVatId,
           invoiceNumber: invoiceNumber,
+          invoiceType: invoiceType,
           taxPoint: taxPoint,
           vats: vats,
         ));

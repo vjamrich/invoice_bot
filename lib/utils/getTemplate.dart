@@ -9,6 +9,11 @@ import 'package:invoice_bot/structure/vat.dart';
 // - Greeting -> Dear xxx
 // - Getting due date - can not extract day
 // - Name of the supplier
+// - Assumes all invoices are in CZK
+// - Shorter form of the company name
+// Remaining
+// - Control statement sections
+// - proper singular / plural form for invoice(s) was / were
 String getTemplate(Notice notice) {
 
   final String emailTemplate =
@@ -27,14 +32,14 @@ String getTemplate(Notice notice) {
       "<li>to correct the originally reported transactions.</li>"
   "</ol>"
   "<br>"
-  "The tax authorities identified that the following invoices were not reported by ${notice.companyName} in section A.4. "
+  "The tax authorities identified that the following invoice(s) were not reported by ${notice.companyName} in section A.4. "
   "of the control statement as sales of goods/services to Helena Pospisilova (VAT ID ${notice.invoices.first.invoiceVatId}) whereas "
   "they were reported by the purchaser in section B.2. of the control statement as goods purchased from "
   "${notice.companyName}:"
   "<br><br>"
   "<ul>${_getInvoiceTemplate(notice.invoices)}</ul>"
   "<br>"
-  "Moreover, the authorities identified that the following invoice was reported by ${notice.companyName} in section "
+  "Moreover, the authorities identified that the following invoice(s) were reported by ${notice.companyName} in section "
   "B.2. of the control statement as goods/services purchased from its supplier with "
   "VAT ID ${notice.invoices.first.invoiceVatId} whereas it was not reported by the supplier in section A.4. of the control "
   "statement as sales of goods/services to ${notice.companyName}:"
