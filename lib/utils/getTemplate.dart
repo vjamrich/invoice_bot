@@ -31,19 +31,7 @@ String getTemplate(Notice notice) {
       "<li>to confirm the validity of the originally filed control statement, or</li>"
       "<li>to correct the originally reported transactions.</li>"
   "</ol>"
-  "<br>"
-  "The tax authorities identified that the following invoice(s) were not reported by ${notice.companyName} in section A.4. "
-  "of the control statement as sales of goods/services to Helena Pospisilova (VAT ID ${notice.invoices.first.invoiceVatId}) whereas "
-  "they were reported by the purchaser in section B.2. of the control statement as goods purchased from "
-  "${notice.companyName}:"
-  "<br><br>"
-  "<ul>${_getInvoiceTemplate(notice.invoices)}</ul>"
-  "<br>"
-  "Moreover, the authorities identified that the following invoice(s) were reported by ${notice.companyName} in section "
-  "B.2. of the control statement as goods/services purchased from its supplier with "
-  "VAT ID ${notice.invoices.first.invoiceVatId} whereas it was not reported by the supplier in section A.4. of the control "
-  "statement as sales of goods/services to ${notice.companyName}:"
-  "<br><br>"
+  "${_getStatementTemplate(notice)}"
   "<b>Please kindly double check these transactions and let us know whether confirmation, update "
   "or amendment of these transactions is needed. Alternatively, please provide us with the copies "
   "of the respective invoices so we can double check the correctness of their reporting. </b>"
@@ -61,6 +49,39 @@ String getTemplate(Notice notice) {
   "If you have any questions, please do not hesitate to contact us.";
 
   return emailTemplate;
+}
+
+
+String _getStatementTemplate(Notice notice) {
+
+  List<List<Invoice>> groupedInvoices = <List<Invoice>>[];
+  for (InvoiceType type in InvoiceType.values) {
+    List<Invoice> invoicesByType = notice.invoices.where((Invoice invoice) {
+      return invoice.invoiceType == type;
+    }).toList();
+    Set<String> set = <String>{};
+    List<Invoice> invoicesByVatId = invoicesByType.where((Invoice invoice) => set.add(invoice.invoiceVatId)).toList();
+
+    if(invoicesByVatId.isNotEmpty) {
+      groupedInvoices.add(invoicesByVatId);
+    }
+  }
+
+  String statementTemplate = "";
+  for(List<Invoice> invoices in groupedInvoices) {
+    final bool isPurchaser = invoices.first.invoiceType == InvoiceType.purchaser;
+
+    // TODO double check if the purchaser is the one with the right wording, or the operator should be switched
+    statementTemplate += "<br>${statementTemplate.isEmpty ? "The" : "Moreover, the"} tax authorities identified that the following invoice${invoices.length > 1 ? "s were" : " was"} ${isPurchaser ? "not" : ""} reported by ${notice.companyName} in section "
+    "${isPurchaser ? "A.4." : "B.2."} of the control statement as sales of goods/services to its ${isPurchaser ? "purchaser" : "supplier"} with "
+    "VAT ID <b>${notice.invoices.first.invoiceVatId}</b> whereas ${invoices.length > 1 ? "they were" : "it was"} ${isPurchaser ? "" : "not"} reported by the purchaser in section ${isPurchaser ? "B.2." : "A.4."} of the control "
+    "statement as goods/services ${isPurchaser ? "purchased from" : "sold to"} ${notice.companyName}:"
+    "<br><br>"
+    "<ul>${_getInvoiceTemplate(invoices)}</ul>"
+    "<br>";
+  }
+
+  return statementTemplate;
 }
 
 

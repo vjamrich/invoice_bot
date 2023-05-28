@@ -26,7 +26,6 @@ Notice? convertPdf(Uint8List data) {
     final RegExp vatAmount2RegExp = RegExp(r" D2:\s*([0-9\s.]+)");
     final RegExp vatBase3RegExp = RegExp(r" ZD3:\s*([0-9\s.]+)");
     final RegExp vatAmount3RegExp = RegExp(r" D3:\s*([0-9\s.]+)");
-    // Daňový\s+subjekt\s+v\s+oddílu\s+(\S+)
 
     List<String> splitText = text.split(RegExp(r" {2,}"));
     final String? tin = tinRegExp.firstMatch(text)?.group(1);
