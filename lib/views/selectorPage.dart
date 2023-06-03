@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_bot/views/homePage.dart';
+import 'package:vat_appeal_bot/views/homePage.dart';
 
-import 'package:invoice_bot/utils/theme.dart' as theme;
-import 'package:invoice_bot/views/aboutPage.dart';
-import 'package:invoice_bot/views/termsPage.dart';
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/views/aboutPage.dart';
+import 'package:vat_appeal_bot/views/termsPage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class SelectorPage extends StatefulWidget {
@@ -127,13 +128,13 @@ class _SelectorPageState extends State<SelectorPage> {
         children: [
           Image.asset(
             "assets/pwc_logo.png",
-            height: 24.0,
+            height: 27.0,
           ),
           const SizedBox(width: 6.0),
           const Text(
-            "Invoice Bot",
+            "VAT Appeal Bot",
             style: TextStyle(
-              fontSize: 20.0,
+              fontSize: 18.0,
               color: theme.textPrimaryColor,
             ),
           ),
@@ -171,19 +172,7 @@ class _SelectorPageState extends State<SelectorPage> {
           ),
           onTap: () async {
             try {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  content: Text(
-                    "Error opening the page. Please try again.",
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
-              );
-              // await launchUrl(Uri.parse("https://www.pwc.com/structure"));
+              await launchUrl(Uri.parse("https://www.pwc.com/structure"));
             } catch (e) {
               debugPrint(e.toString());
             }

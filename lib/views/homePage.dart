@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_bot/structure/invoice.dart';
-import 'package:invoice_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/notice.dart';
 
-import 'package:invoice_bot/views/homePage/generatePage.dart';
-import 'package:invoice_bot/views/homePage/overviewPage.dart';
-import 'package:invoice_bot/views/homePage/uploadPage.dart';
+import 'package:vat_appeal_bot/views/homePage/generatePage.dart';
+import 'package:vat_appeal_bot/views/homePage/overviewPage.dart';
+import 'package:vat_appeal_bot/views/homePage/uploadPage.dart';
 
 
 class HomePage extends StatefulWidget {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_bot/utils/theme.dart' as theme;
+
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
 
 
 class AboutPage extends StatelessWidget {
@@ -18,11 +21,11 @@ class AboutPage extends StatelessWidget {
           width: theme.borderWidth,
         ),
       ),
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
+          const Text(
             "About",
             style: TextStyle(
               fontSize: 20.0,
@@ -30,17 +33,17 @@ class AboutPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8.0),
-          Text(
-            "Welcome to the Invoice Bot web app, a tool designed for the Tax & Legal team of PwC Czech Republic. "
+          const SizedBox(height: 8.0),
+          const Text(
+            "Welcome to the VAT Appeal Bot web app, a tool designed for the Tax & Legal team of PwC Czech Republic. "
             "This app helps you to generate a response email for your clients based on a received notice. It is fast, easy and accurate.",
             style: TextStyle(
               fontSize: 16.0,
               color: theme.textSecondaryColor,
             ),
           ),
-          SizedBox(height: 16.0),
-          Text(
+          const SizedBox(height: 16.0),
+          const Text(
             "How it works",
             style: TextStyle(
               fontSize: 16.0,
@@ -48,8 +51,8 @@ class AboutPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8.0),
-          Text(
+          const SizedBox(height: 8.0),
+          const Text(
             "To use this app, you need to upload a received notice in a pdf format (please ensure the notice is not password protected). "
             "The app will analyse the notice and extract the relevant information, such as the company name, TIN, invoice numbers, and dates."
             "\n"
@@ -63,8 +66,8 @@ class AboutPage extends StatelessWidget {
               color: theme.textSecondaryColor,
             ),
           ),
-          SizedBox(height: 16.0),
-          Text(
+          const SizedBox(height: 16.0),
+          const Text(
             "Contact us",
             style: TextStyle(
               fontSize: 16.0,
@@ -72,14 +75,51 @@ class AboutPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8.0),
-          Text(
-            "If you have any questions, feedback or issues with this app, please contact us at viktor.jamrich@pwc.com. "
-            "We appreciate your input and we are always looking for ways to improve our service. Thank you for using Invoice Bot!",
-            style: TextStyle(
-              fontSize: 16.0,
-              color: theme.textSecondaryColor,
-            ),
+          const SizedBox(height: 8.0),
+          Wrap(
+            children: [
+              const Text(
+                "If you have any questions, feedback or issues with this app, please contact us at ",
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: theme.textSecondaryColor,
+                ),
+              ),
+              SelectionContainer.disabled(
+                child: GestureDetector(
+                  child: const Text(
+                    "cz_vatappealbot@pwc.com",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: theme.accentSecondaryColor,
+                      decoration: TextDecoration.underline,
+                      decorationColor: theme.accentSecondaryColor,
+                    ),
+                  ),
+                  onTap: () async {
+                    try {
+                      await launchUrl(Uri.parse("mailto:cz_vatappealbot@pwc.com?subject=VAT Appeal Bot Feedback"));
+                    } catch (e) {
+                      debugPrint(e.toString());
+                    }
+                  },
+                ),
+              ),
+              const Text(
+                ". ",
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: theme.textSecondaryColor,
+                ),
+              ),
+              const Text(
+                "We appreciate your input and we are always looking for ways to improve our service. Thank you for using VAT Appeal Bot!",
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: theme.textSecondaryColor,
+                ),
+              ),
+            ],
           ),
         ],
       ),

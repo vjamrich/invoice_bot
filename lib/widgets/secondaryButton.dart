@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
 
 
 class SecondaryButton extends StatelessWidget {

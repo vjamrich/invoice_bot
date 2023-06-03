@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
 import 'package:oktoast/oktoast.dart';
 
 

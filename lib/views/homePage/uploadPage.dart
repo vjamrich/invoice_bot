@@ -4,15 +4,15 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
-import 'package:invoice_bot/structure/invoice.dart';
-import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/utils/convertPdf.dart';
-import 'package:invoice_bot/utils/convertXml.dart';
-import 'package:invoice_bot/utils/uploadFile.dart';
-import 'package:invoice_bot/widgets/primaryButton.dart';
+import 'package:vat_appeal_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/utils/convertPdf.dart';
+import 'package:vat_appeal_bot/utils/convertXml.dart';
+import 'package:vat_appeal_bot/utils/uploadFile.dart';
+import 'package:vat_appeal_bot/widgets/primaryButton.dart';
 
-import 'package:invoice_bot/utils/theme.dart' as theme;
-import 'package:invoice_bot/widgets/secondaryButton.dart';
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/widgets/secondaryButton.dart';
 import 'package:oktoast/oktoast.dart';
 
 

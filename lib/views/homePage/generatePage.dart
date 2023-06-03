@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_bot/utils/getTemplate.dart';
+import 'package:vat_appeal_bot/utils/getTemplate.dart';
 
 import 'package:oktoast/oktoast.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
 
-import 'package:invoice_bot/utils/theme.dart' as theme;
-import 'package:invoice_bot/structure/invoice.dart';
-import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/widgets/noticeHeader.dart';
-import 'package:invoice_bot/widgets/primaryButton.dart';
-import 'package:invoice_bot/widgets/secondaryButton.dart';
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/widgets/noticeHeader.dart';
+import 'package:vat_appeal_bot/widgets/primaryButton.dart';
+import 'package:vat_appeal_bot/widgets/secondaryButton.dart';
 import 'package:rich_clipboard/rich_clipboard.dart';
 
 

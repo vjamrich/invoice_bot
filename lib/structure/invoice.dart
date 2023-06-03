@@ -1,4 +1,4 @@
-import 'package:invoice_bot/structure/vat.dart';
+import 'package:vat_appeal_bot/structure/vat.dart';
 
 
 enum InvoiceType{

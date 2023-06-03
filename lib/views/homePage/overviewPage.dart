@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:invoice_bot/structure/invoice.dart';
-import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/widgets/noticeHeader.dart';
-import 'package:invoice_bot/utils/theme.dart' as theme;
-import 'package:invoice_bot/widgets/primaryButton.dart';
-import 'package:invoice_bot/widgets/secondaryButton.dart';
+import 'package:vat_appeal_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/widgets/noticeHeader.dart';
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/widgets/primaryButton.dart';
+import 'package:vat_appeal_bot/widgets/secondaryButton.dart';
 
 
 class OverviewPage extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:invoice_bot/utils/formatVatString.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-import 'package:invoice_bot/structure/invoice.dart';
-import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/structure/vat.dart';
-import 'package:invoice_bot/utils/formatDateString.dart';
+import 'package:vat_appeal_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/structure/vat.dart';
+import 'package:vat_appeal_bot/utils/formatDateString.dart';
+import 'package:vat_appeal_bot/utils/formatVatString.dart';
 
 
 Notice? convertPdf(Uint8List data) {
@@ -49,7 +49,7 @@ Notice? convertPdf(Uint8List data) {
     List<Invoice> invoices = <Invoice>[];
     // TODO issue if we do not have same amount of matches - it will most likely error
     for(int index = 0; index < invoiceNumberMatches.length; index++) {
-      final String? invoiceVatId = invoiceVatIdMatches[index].group(2); // TODO group 1 is capturing, if it's supplier or provider
+      final String? invoiceVatId = invoiceVatIdMatches[index].group(2);
       final InvoiceType invoiceType = invoiceVatIdMatches[index].group(1) == "DIČ odb." ? InvoiceType.purchaser : InvoiceType.supplier;
       final String? invoiceNumber = invoiceNumberMatches[index].group(1);
       final DateTime? taxPoint = formatDateString(date: taxPointMatches[index].group(1));

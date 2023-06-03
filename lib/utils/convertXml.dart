@@ -1,4 +1,4 @@
-import 'package:invoice_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/invoice.dart';
 
 
 List<Invoice> convertXml(String url) {

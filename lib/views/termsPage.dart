@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
 
 
 class TermsPage extends StatelessWidget {
@@ -32,7 +32,7 @@ class TermsPage extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           Text(
-            "Please read these terms and conditions carefully before using the Invoice Bot web app (the “app”). "
+            "Please read these terms and conditions carefully before using the VAT Appeal Bot web app (the “app”). "
             "By using the app, you agree to be bound by these terms and conditions. If you do not agree to these terms and conditions, please do not use the app.",
             style: TextStyle(
               fontSize: 16.0,
@@ -123,7 +123,7 @@ class TermsPage extends StatelessWidget {
           SizedBox(height: 8.0),
           Text(
             "If you have any questions or concerns about these terms and conditions, "
-            "please contact the Technology Consulting Digital Strategy community at PwC Czech Republic",
+            "please contact the Technology Consulting Digital Strategy community at PwC Czech Republic.",
             style: TextStyle(
               fontSize: 16.0,
               color: theme.textSecondaryColor,

@@ -1,11 +1,11 @@
 {
-    "name": "invoice_bot",
-    "short_name": "invoice_bot",
+    "name": "VAT Appeal Bot",
+    "short_name": "VAT Appeal Bot",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A Bot for generating VAT appeal emails.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

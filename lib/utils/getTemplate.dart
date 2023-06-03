@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
 
-import 'package:invoice_bot/structure/invoice.dart';
-import 'package:invoice_bot/structure/notice.dart';
-import 'package:invoice_bot/structure/vat.dart';
+import 'package:vat_appeal_bot/structure/invoice.dart';
+import 'package:vat_appeal_bot/structure/notice.dart';
+import 'package:vat_appeal_bot/structure/vat.dart';
 
 
 // Not doable
@@ -11,6 +11,10 @@ import 'package:invoice_bot/structure/vat.dart';
 // - Name of the supplier
 // - Assumes all invoices are in CZK
 // - Shorter form of the company name
+// TODO
+// - How to handle multiple VAT IDs in the sections?
+// - Is the purchaser / supplier template correct? Should it rather be switched?
+// - How does the Notice from A1 / ... look like? So we can incorporate
 String getTemplate(Notice notice) {
 
   final String emailTemplate =
@@ -72,9 +76,8 @@ String _getStatementTemplate(Notice notice) {
   for(List<Invoice> invoices in groupedInvoices) {
     final bool isPurchaser = invoices.first.invoiceType == InvoiceType.purchaser;
 
-    // TODO double check if the purchaser is the one with the right wording, or the operator should be switched
     statementTemplate += "${statementTemplate.isEmpty ? "The" : "Moreover, the"} tax authorities identified that the following invoice${invoices.length > 1 ? "s were" : " was"} ${isPurchaser ? "not" : ""} reported by ${notice.companyName} in section "
-    "${isPurchaser ? "A.4." : "B.2."} of the control statement as sales of goods/services to its ${isPurchaser ? "purchaser" : "supplier"} with "
+    "${isPurchaser ? "A.4." : "B.2."} of the control statement as ${isPurchaser ? "sales of goods/services to its purchaser" : "goods/services purchased from its supplier"} with "
     "VAT ID <b>${notice.invoices.first.invoiceVatId}</b> whereas ${invoices.length > 1 ? "they were" : "it was"} ${isPurchaser ? "" : "not"} reported by the purchaser in section ${isPurchaser ? "B.2." : "A.4."} of the control "
     "statement as goods/services ${isPurchaser ? "purchased from" : "sold to"} ${notice.companyName}:"
     "<br><br>"

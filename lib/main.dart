@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:invoice_bot/views/selectorPage.dart';
-import 'package:invoice_bot/utils/theme.dart' as theme;
+import 'package:vat_appeal_bot/views/selectorPage.dart';
+import 'package:vat_appeal_bot/utils/theme.dart' as theme;
 import 'package:oktoast/oktoast.dart';
 
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Invoice Bot",
+        title: "VAT Appeal Bot",
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: theme.accentColor),
           useMaterial3: true,
