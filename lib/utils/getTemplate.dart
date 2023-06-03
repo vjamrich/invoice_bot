@@ -102,5 +102,5 @@ bool _areMultipleVatIds(List<Invoice> invoices) {
   List<Invoice> uniqueVatIds = invoices.where((Invoice invoice) => vatIdsSet.add(invoice.invoiceVatId)).toList();
   bool areMultipleVatIds = uniqueVatIds.length > 1;
 
-  return !areMultipleVatIds;
+  return areMultipleVatIds;
 }

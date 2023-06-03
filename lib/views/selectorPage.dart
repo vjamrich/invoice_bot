@@ -4,7 +4,6 @@ import 'package:vat_appeal_bot/views/homePage.dart';
 import 'package:vat_appeal_bot/utils/theme.dart' as theme;
 import 'package:vat_appeal_bot/views/aboutPage.dart';
 import 'package:vat_appeal_bot/views/termsPage.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 class SelectorPage extends StatefulWidget {
