@@ -42,6 +42,8 @@ dependencies:
   rich_clipboard: ^1.0.1
   syncfusion_flutter_pdf: ^21.2.5
   url_launcher: ^6.1.11
+  firebase_core: ^2.13.1
+  firebase_analytics: ^10.4.2
 
 dev_dependencies:
   flutter_test:

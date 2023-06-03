@@ -28,3 +28,5 @@ const textSecondaryColor = Color.fromRGBO(209, 209, 209, 1);
 
 const double borderWidth = 1;
 final BorderRadius borderRadius = BorderRadius.circular(5);
+
+const MaterialColor materialAccentColor = MaterialColor(0xFF9AA4BE, <int, Color>{});

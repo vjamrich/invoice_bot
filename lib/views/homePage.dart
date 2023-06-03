@@ -28,7 +28,8 @@ class _HomePageState extends State<HomePage> {
     pages = <Widget>[
       UploadPage(
         onAnalyse: (Notice notice, List<Invoice>? xmlInvoices) {
-          pages += [
+          pages = <Widget>[pages.first];
+          pages += <Widget>[
             OverviewPage(
               notice: notice,
               xmlInvoices: xmlInvoices,

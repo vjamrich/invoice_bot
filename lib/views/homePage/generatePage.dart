@@ -35,7 +35,10 @@ class GeneratePage extends StatelessWidget {
       width: 1150.0,
       child: Column(
         children: <Widget>[
-          NoticeHeader(notice: notice),
+          NoticeHeader(
+            notice: notice,
+            isDateEditable: false,
+          ),
           const SizedBox(height: 14.0),
           _richText(controller),
           const SizedBox(height: 14.0),

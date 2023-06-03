@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'package:vat_appeal_bot/structure/invoice.dart';
 import 'package:vat_appeal_bot/structure/notice.dart';
@@ -50,7 +51,13 @@ class OverviewPage extends StatelessWidget {
               ),
               const SizedBox(width: 14.0),
               PrimaryButton(
-                onPressed: () => onGenerate?.call(),
+                onPressed: () {
+                  if(notice.receivedDate != null) {
+                    onGenerate?.call();
+                  } else {
+                    showToast("Select received date before continuing");
+                  }
+                },
                 child: const Text(
                   "Generate",
                   style: TextStyle(

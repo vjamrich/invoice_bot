@@ -18,19 +18,12 @@ class SelectorPage extends StatefulWidget {
 class _SelectorPageState extends State<SelectorPage> {
 
   final ScrollController controller = ScrollController();
-
   late String activePage;
-  final Map<String, Widget> pages = {
-    "Home": const HomePage(key: ValueKey("homePage")),
-    "About": const AboutPage(),
-    "Terms & Conditions": const TermsPage(),
-  };
-
 
   @override
   void initState() {
     super.initState();
-    activePage = pages.keys.first;
+    activePage = getPages().keys.first;
   }
 
 
@@ -58,7 +51,7 @@ class _SelectorPageState extends State<SelectorPage> {
                     child: SelectionArea(
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 0),
-                        child: pages[activePage],
+                        child: getPages()[activePage],
                       ),
                     ),
                   ),
@@ -66,11 +59,6 @@ class _SelectorPageState extends State<SelectorPage> {
               ),
             ),
           ),
-          // const Spacer(),
-          // Padding(
-          //   padding: const EdgeInsets.all(24.0),
-          //   child: _footer(),
-          // ),
         ],
       ),
     );
@@ -121,8 +109,8 @@ class _SelectorPageState extends State<SelectorPage> {
           bottom: BorderSide(
             color: theme.borderColor,
             width: theme.borderWidth,
-          )
-        )
+          ),
+        ),
       ),
       child: Row(
         children: [
@@ -139,50 +127,15 @@ class _SelectorPageState extends State<SelectorPage> {
             ),
           ),
           const Spacer(),
-        ] + getTabs(pages),
+        ] + getTabs(getPages()),
       ),
     );
   }
 
 
-  Widget _footer() {
-
-    TextStyle style = const TextStyle(
-      fontSize: 12.0,
-      color: theme.textSecondaryColor,
-    );
-
-    TextStyle hyperlinkStyle = const TextStyle(
-      fontSize: 12.0,
-      color: theme.accentSecondaryColor,
-      decoration: TextDecoration.underline,
-      decorationColor: theme.accentSecondaryColor,
-    );
-
-    return Wrap(
-      children: [
-        Text(
-          "© 2023 PwC. All rights reserved. PwC refers to the PwC network and/or one or more of its member firms, each of which is a separate legal entity. Please see ",
-          style: style,
-        ),
-        GestureDetector(
-          child: Text(
-            "www.pwc.com/structure",
-            style: hyperlinkStyle,
-          ),
-          onTap: () async {
-            try {
-              await launchUrl(Uri.parse("https://www.pwc.com/structure"));
-            } catch (e) {
-              debugPrint(e.toString());
-            }
-          },
-        ),
-        Text(
-          " for further details.",
-          style: style,
-        )
-      ],
-    );
-  }
+  Map<String, Widget> getPages() => {
+    "Home": HomePage(key: UniqueKey()),
+    "About": const AboutPage(),
+    "Terms & Conditions": const TermsPage(),
+  };
 }

@@ -5,6 +5,7 @@ class Notice {
 
   String? companyName;
   String? tin;
+  DateTime? receivedDate;
   DateTime? startDate;
   DateTime? endDate;
   List<Invoice> invoices;
@@ -12,6 +13,7 @@ class Notice {
   Notice({
     this.companyName,
     this.tin,
+    this.receivedDate,
     this.startDate,
     this.endDate,
     this.invoices = const <Invoice>[],
