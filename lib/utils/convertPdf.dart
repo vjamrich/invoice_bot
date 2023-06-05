@@ -18,7 +18,7 @@ Notice? convertPdf(Uint8List data) {
     final RegExp startDateRegExp = RegExp(r"od (\d{2}\.\d{2}\.\d{4})");
     final RegExp endDateRegExp = RegExp(r"do (\d{2}\.\d{2}\.\d{4})");
     final RegExp invoiceVatId = RegExp(r"(DIČ dod.|DIČ odb.):\s+(\S+)");
-    final RegExp invoiceNumberRegExp = RegExp(r"Ev\.č\.:\s+(\d+)\s*");
+    final RegExp invoiceNumberRegExp = RegExp(r"Ev\.č\.:\s+(\S+)\s*");
     final RegExp taxPointRegExp = RegExp(r"DPPD: (\d{2}\.\d{2}\.\d{4})");
     final RegExp vatBase1RegExp = RegExp(r" ZD1:\s*([0-9\s.]+)");
     final RegExp vatAmount1RegExp = RegExp(r" D1:\s*([0-9\s.]+)");
